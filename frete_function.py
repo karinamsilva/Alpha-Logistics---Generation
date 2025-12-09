@@ -40,8 +40,8 @@ def abrir_formulario_frete():
             fretes[campo].delete(0,tk.END)
 
 
-    tk.Button(popup_frete, text='Salvar', pady=20, command=salvar).pack(pady=20)
-    tk.Button(popup_frete, text='Limpar', pady=20, command=clear).pack()
+    tk.Button(popup_frete, text='Salvar', command=salvar).pack(pady=5)
+    tk.Button(popup_frete, text='Limpar', command=clear).pack(pady=5)
 
 def adicionar_frete(registro):
 #para manipular o arquivo
