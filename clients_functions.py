@@ -30,7 +30,7 @@ def abrir_formulario_cliente():
             entrada_clientes[campo].delete(0,tk.END)
     
     tk.Button(popup_cliente, text="Salvar", command=salvar_clientes).pack(pady=5)
-    tk.Button(popup_cliente,text="Limpar",command=clear).pack()
+    tk.Button(popup_cliente,text="Limpar",command=clear).pack(pady=5)
 
 
 def adicionar_dados_cliente(data):
