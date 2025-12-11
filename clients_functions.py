@@ -1,6 +1,7 @@
 import os
 import csv
 import tkinter as tk
+from tkinter import ttk
 
 dados_cliente = "dados_cliente.csv"
 campos_cliente = ['registro_cliente','nome','sobrenome','cidade','bairro']
@@ -39,3 +40,27 @@ def adicionar_dados_cliente(data):
         escrever = csv.DictWriter(arquivo,fieldnames=campos_cliente)
         escrever.writerow(data)
         
+def exibir_cliente():
+    if not os.path.isfile(dados_cliente):
+        tk.Message.showerror('Erro', 'Arquivo não encontrado')
+        return 
+    
+    tabela_cliente = tk.Toplevel()
+    tabela_cliente.title('Clientes')
+    tabela_cliente.geometry('750x500')
+
+    coluna_clientes = campos_cliente
+
+    tabela = ttk.Treeview(tabela_cliente,columns=coluna_clientes,show='headings')
+    tabela.pack(fill='both')
+
+    for colunas in coluna_clientes:
+        tabela.heading(colunas,text=colunas)
+        tabela.column(colunas,width=100)
+
+    with open(dados_cliente,"r",encoding='utf-8') as arquivo:
+        leitor = csv.DictReader(arquivo)
+
+        for linha in leitor:
+            valores = [linha.get(colunas,None) for coluna in coluna_clientes]
+            tabela.insert("","end",values=valores)

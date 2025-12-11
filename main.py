@@ -30,10 +30,10 @@ button_screen = ttk.Frame(root)
 
 button_screen.pack(pady=20)
 
-ver_frete_button = ttk.Button(button_screen, text="Ver Frete")
+ver_frete_button = ttk.Button(button_screen, text="Ver Frete", command=exibir_fretes)
 #infos = onde e texto
 add_frete_button = ttk.Button(button_screen, text="Adicionar Frete", command=abrir_formulario_frete)
-ver_cliente_button = ttk.Button(button_screen,text="Ver Clientes")
+ver_cliente_button = ttk.Button(button_screen,text="Ver Clientes",command=exibir_cliente)
 add_cliente_button = ttk.Button(button_screen,text="Adicionar Cliente", command=abrir_formulario_cliente)
 
 #para visualizar botões, cria tabela e informa qual coluna irá exibir
@@ -41,7 +41,6 @@ ver_frete_button.grid(row=0,column=0, pady=10,padx=10)
 add_frete_button.grid(row=0,column=1, pady=10,padx=10)
 ver_cliente_button.grid(row=1,column=0, pady=10,padx=10)
 add_cliente_button.grid(row=1,column=1, pady=10,padx=10)
-
 
 
 #ver a tela 

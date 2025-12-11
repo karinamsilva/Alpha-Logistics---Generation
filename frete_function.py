@@ -1,6 +1,7 @@
 import os 
 import csv
-
+import tkinter as tk 
+from tkinter import ttk
 
 #função sistema operacional
 
@@ -8,8 +9,6 @@ dados_frete = "dados_frete.csv"
 
 campo_fretes = ['registro_frete','origem','destino','cliente','produto','status']
 fretes = {}
-
-import tkinter as tk 
 
 def abrir_formulario_frete():
     popup_frete = tk.Toplevel()
@@ -54,3 +53,36 @@ def adicionar_frete(registro):
         escrever = csv.DictWriter(arquivo_fretes, fieldnames=campo_fretes)
         escrever.writerow(registro)
 
+def exibir_fretes():
+    #colocar fator correção ao exibir dados
+    if not os.path.isfile(dados_frete):
+        tk.Message.showerror('Erro', 'Arquivo não encontrado')
+        return 
+    #criar janela da tabela de fretes
+    tabela_frete = tk.Toplevel()
+    tabela_frete.title('Fretes')
+    tabela_frete.geometry('750x500')
+
+    #dizer para a tabela os campos que tem (colunas)
+    colunas_fretes = campo_fretes
+
+    tabela = ttk.Treeview(tabela_frete,columns=colunas_fretes, show='headings')
+    #treeview, comando para mostrar os dados
+    #itens são 1-onde, 2-colunas,3-cabeçalhos
+    tabela.pack(fill='both')
+
+    #config colunas 
+    for colunas in colunas_fretes:
+        tabela.heading(colunas,text=colunas)
+        #cabeçalho
+        tabela.column(colunas,width=100)
+        #config tamanho da coluna
+
+    with open(dados_frete,"r",encoding='utf-8') as arquivo:
+        leitor = csv.DictReader(arquivo)
+        #ler o csv 
+        
+        for linha in leitor: 
+            #para cada linha lida do csv, cria um campo para o valor 
+            valores = [linha.get(colunas,None) for coluna in colunas_fretes]
+            tabela.insert("","end",values=valores)
